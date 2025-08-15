@@ -1,41 +1,43 @@
 ## Solace Candidate Assignment
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Next.js application with PostgreSQL database.
 
 ## Getting Started
 
-Install dependencies
+1. **Install dependencies**
 
 ```bash
-npm i
+npm install
 ```
 
-Run the development server:
-
-```bash
-npm run dev
-```
-
-## Database set up
-
-The app is configured to return a default list of advocates. This will allow you to get the app up and running without needing to configure a database. If you’d like to configure a database, you’re encouraged to do so. You can uncomment the url in `.env` and the line in `src/app/api/advocates/route.ts` to test retrieving advocates from the database.
-
-1. Feel free to use whatever configuration of postgres you like. The project is set up to use docker-compose.yml to set up postgres. The url is in .env.
+2. **Start PostgreSQL with Docker**
 
 ```bash
 docker compose up -d
 ```
 
-2. Create a `solaceassignment` database.
-
-3. Push migration to the database
+3. **Configure environment**
 
 ```bash
-npx drizzle-kit push
+cp .env.example .env
 ```
 
-4. Seed the database
+4. **Push database schema**
 
 ```bash
-curl -X POST http://localhost:3000/api/seed
+npm run migrate:up
 ```
+
+5. **Seed the database**
+
+```bash
+npm run seed
+```
+
+6. **Start the development server**
+
+```bash
+npm run dev
+```
+
+The app runs at http://localhost:3000
